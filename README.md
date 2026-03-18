@@ -230,21 +230,6 @@ Pull requests are welcome. For major changes, open an issue first.
 
 Kairu is a fully original character. This is a fan-made project. No affiliation with any existing anime, manga, manhwa, webtoon, or IP. All anime titles mentioned are property of their respective owners and are referenced for review/commentary purposes only.
 
----
-
-## 📄 License
-
-## ☕ Buy Me a Coffee Setup
-
-This project uses [Buy Me a Coffee](https://buymeacoffee.com) for donations.
-
-1. Create your account at [buymeacoffee.com](https://buymeacoffee.com)
-2. Find your username in your profile URL: `buymeacoffee.com/YOUR_USERNAME`
-3. Search and replace all 3 instances:
-
-```bash
-grep -rl "YOUR_BMC_USERNAME" . | xargs sed -i 's/YOUR_BMC_USERNAME/your_actual_username/g'
-```
 
 ---
 
