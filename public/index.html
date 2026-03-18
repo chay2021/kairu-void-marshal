@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="KAIRU — The Void Marshal. Anime tier lists, season picks, power scaling debates, and live AI chat with the Shadow Army's most dramatic critic.">
+  <meta name="theme-color" content="#04040a">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="KAIRU — The Void Marshal">
+  <meta property="og:description" content="Anime reviews by decree. Tier lists, season picks, and live AI chat with a former Insect Sovereign.">
+  <meta property="og:type" content="website">
+
+  <title>KAIRU — The Void Marshal | Anime by Decree</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ── TOAST NOTIFICATION ── -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- ── NAVIGATION ── -->
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-brand" onclick="scrollTo(0,0)" role="button" tabindex="0" aria-label="Back to top">
+      <div class="nav-sigil" aria-hidden="true">K</div>
+      <span class="nav-title">Kairu</span>
+    </div>
+
+    <ul class="nav-links" role="list">
+      <li onclick="go('decrees')" tabindex="0">Decrees</li>
+      <li onclick="go('rankings')" tabindex="0">Rankings</li>
+      <li onclick="go('orders')" tabindex="0">Season Picks</li>
+      <li onclick="go('council')" tabindex="0">War Council</li>
+      <li onclick="go('chat-section')" tabindex="0">Talk to Kairu</li>
+    </ul>
+
+    <button class="nav-cta" onclick="go('oath')" aria-label="Join the Shadow Army">
+      Swear Loyalty
+    </button>
+
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle mobile menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── MOBILE MENU ── -->
+  <ul class="mobile-menu" id="mobile-menu" role="list" aria-label="Mobile navigation">
+    <li onclick="go('decrees');closeMenu()">Decrees</li>
+    <li onclick="go('rankings');closeMenu()">Rankings</li>
+    <li onclick="go('orders');closeMenu()">Season Picks</li>
+    <li onclick="go('council');closeMenu()">War Council</li>
+    <li onclick="go('chat-section');closeMenu()">Talk to Kairu</li>
+    <li onclick="go('oath');closeMenu()">Swear Loyalty</li>
+  </ul>
+
+  <!-- ══════════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════ -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="particles" id="particles" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow" aria-hidden="true">
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-text">By decree of the abyss</span>
+      </div>
+
+      <div class="hero-rank" role="text">
+        ◆ &nbsp;Shadow Army · General Rank · Void Class&nbsp; ◆
+      </div>
+
+      <h1 id="hero-heading">
+        I am
+        <span class="name-accent">KAIRU</span>
+      </h1>
+      <p class="hero-subtitle" aria-label="The Void Marshal">The Void Marshal</p>
+
+      <p class="hero-decree">
+        Once a world-devouring Insect Sovereign. Now <strong>bound to the Shadow Throne</strong> —
+        and inexplicably passionate about ranking anime. Tier lists, power scaling, and seasonal
+        decrees delivered with the authority of <strong>one who has seen civilisations end</strong>.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="go('decrees')">Read the Decrees ↓</button>
+        <button class="btn-ghost" onclick="go('chat-section')">Talk to Kairu ↗</button>
+      </div>
+    </div>
+
+    <!-- Decorative rotating sigil -->
+    <div class="hero-visual" aria-hidden="true">
+      <div class="sigil-wrap">
+        <div class="sigil-ring"></div>
+        <div class="sigil-ring"></div>
+        <div class="sigil-ring"></div>
+        <div class="sigil-center">
+          <div class="sigil-symbol">K</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       PERSONA STRIP
+  ══════════════════════════════════════════ -->
+  <div class="persona-strip" role="complementary" aria-label="About Kairu">
+    <div class="persona-avatar" aria-hidden="true">
+      <div class="pa-inner">K</div>
+    </div>
+    <div class="persona-text">
+      <h3>Who is Kairu?</h3>
+      <p>"I was an Insect Sovereign. I consumed three continents for breakfast. Now I consume seasonal
+        anime charts — and I must say, the pacing issues in modern isekai offend me on a cellular level."</p>
+    </div>
+    <div class="persona-stats" aria-label="Kairu statistics">
+      <div class="stat-item">
+        <span class="stat-num">847</span>
+        <span class="stat-label">Titles Reviewed</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" id="army-count">2.4K</span>
+        <span class="stat-label">Shadow Army</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">S+</span>
+        <span class="stat-label">Threat Rating</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── POWER INDEX BAR ── -->
+  <div class="power-index" role="complementary" aria-label="Site statistics">
+    <div class="pi-inner">
+      <div class="pi-stat"><span class="pi-num">S</span><span class="pi-label">Overall Rank</span></div>
+      <div class="pi-stat"><span class="pi-num">847+</span><span class="pi-label">Anime Catalogued</span></div>
+      <div class="pi-stat"><span class="pi-num">Weekly</span><span class="pi-label">Decree Frequency</span></div>
+      <div class="pi-stat"><span class="pi-num">Zero</span><span class="pi-label">Tolerances Given</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       LATEST DECREES
+  ══════════════════════════════════════════ -->
+  <section id="decrees" aria-labelledby="decrees-heading">
+    <div class="section-header fade-in">
+      <div class="section-label">
+        <span>Latest Decrees</span>
+        <div class="label-line" aria-hidden="true"></div>
+      </div>
+      <h2 class="section-title" id="decrees-heading">By Order of the <em>Void Marshal</em></h2>
+      <p class="section-sub">When Kairu speaks, shadows listen. These are the freshest directives from headquarters.</p>
+    </div>
+
+    <div class="decrees-grid fade-in">
+      <!-- Featured decree -->
+      <article class="decree-main" onclick="showToast('📜 Opening Dungeon Meshi deep-dive...')" tabindex="0" role="button" aria-label="Read Dungeon Meshi decree">
+        <div class="decree-bg" aria-hidden="true">
+          <span class="decree-badge">🔴 New Decree</span>
+          <div class="decree-overlay">Read Full Decree →</div>
+        </div>
+        <div class="decree-body">
+          <div class="decree-category">⚔ Power Scaling Analysis</div>
+          <h3 class="decree-title">Dungeon Meshi Proves That the Greatest Monsters Are the Ones Who Feed You</h3>
+          <p class="decree-quote">
+            "I, Kairu, who once devoured kingdoms — have watched this chef season a Basilisk with rosemary.
+            I am experiencing what humans call 'complicated feelings.' This show gets a 9.7. Reluctantly."
+          </p>
+          <div class="decree-meta">
+            <span>Winter 2024</span><span aria-hidden="true">·</span>
+            <span>Rating: 9.7 / 10</span><span aria-hidden="true">·</span>
+            <span>Highly Commanded</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Decree stack -->
+      <div class="decree-stack">
+        <article class="decree-small" onclick="showToast('📊 Tier list update loading...')" tabindex="0" role="button">
+          <div class="ds-cat">📊 Tier List Update</div>
+          <h4 class="ds-title">2025 Winter Season Final Tier List is Here</h4>
+          <p class="ds-excerpt">"Three generals fell from S-tier. Two rose. One show about bread made A-tier. I am not explaining."</p>
+        </article>
+        <article class="decree-small" onclick="showToast('⚔ Power scaling brief opening...')" tabindex="0" role="button">
+          <div class="ds-cat">🏆 Power Scaling</div>
+          <h4 class="ds-title">Could Muzan Beat Sukuna? A Definitive Military Assessment</h4>
+          <p class="ds-excerpt">"As a former Insect Sovereign, I am uniquely qualified to analyse which demon lord would survive my anterior mandibles."</p>
+        </article>
+        <article class="decree-small" onclick="showToast('🌸 Spring preview unlocking...')" tabindex="0" role="button">
+          <div class="ds-cat">📺 First Impressions</div>
+          <h4 class="ds-title">Spring 2025 Preview: Kairu's Strategic Briefing</h4>
+          <p class="ds-excerpt">"27 new shows. Seven are worthy. The rest shall serve as cautionary tales."</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       BATTLE RANKINGS (TIER LIST)
+  ══════════════════════════════════════════ -->
+  <section id="rankings" class="rankings-section" aria-labelledby="rankings-heading">
+    <div class="section-header fade-in">
+      <div class="section-label">
+        <span>Battle Rankings</span>
+        <div class="label-line" aria-hidden="true"></div>
+      </div>
+      <h2 class="section-title" id="rankings-heading">The <em>Official Tier List</em> — Current Season</h2>
+      <p class="section-sub">Click any title to send it directly to Kairu in the chat below and get his full verdict.</p>
+    </div>
+
+    <div class="tier-table fade-in" role="table" aria-label="Anime tier list">
+      <div class="tier-header" role="row">
+        <span role="columnheader">Rank</span>
+        <span role="columnheader">Titles — Click for Kairu's Verdict</span>
+      </div>
+
+      <div class="tier-row" role="row">
+        <div class="tier-label tier-S" role="rowheader" aria-label="S tier">S</div>
+        <div role="cell">
+          <div class="tier-entries">
+            <div class="tier-entry" data-ask="Give me your full verdict on Dungeon Meshi" tabindex="0" role="button">Dungeon Meshi</div>
+            <div class="tier-entry" data-ask="Give me your full verdict on Vinland Saga" tabindex="0" role="button">Vinland Saga</div>
+            <div class="tier-entry" data-ask="Give me your full verdict on Frieren: Beyond Journey's End" tabindex="0" role="button">Frieren</div>
+            <div class="tier-entry" data-ask="Give me your full verdict on Hunter x Hunter 2011" tabindex="0" role="button">HxH (2011)</div>
+            <div class="tier-entry" data-ask="Give me your full verdict on Mushishi" tabindex="0" role="button">Mushishi</div>
+          </div>
+          <p class="tier-verdict">"These titles are permitted to exist without my contempt. That is the highest honour I grant."</p>
+        </div>
+      </div>
+
+      <div class="tier-row" role="row">
+        <div class="tier-label tier-A" role="rowheader" aria-label="A tier">A</div>
+        <div role="cell">
+          <div class="tier-entries">
+            <div class="tier-entry" data-ask="Give me your verdict on Jujutsu Kaisen Season 1" tabindex="0" role="button">JJK Season 1</div>
+            <div class="tier-entry" data-ask="Give me your verdict on Attack on Titan" tabindex="0" role="button">Attack on Titan</div>
+            <div class="tier-entry" data-ask="Give me your verdict on Fullmetal Alchemist Brotherhood" tabindex="0" role="button">FMA Brotherhood</div>
+            <div class="tier-entry" data-ask="Give me your verdict on Re:Zero" tabindex="0" role="button">Re:Zero</div>
+            <div class="tier-entry" data-ask="Give me your verdict on Overlord" tabindex="0" role="button">Overlord</div>
+          </div>
+          <p class="tier-verdict">"Strong. Would survive a mid-tier dungeon. I would not eat them. That is almost a compliment."</p>
+        </div>
+      </div>
+
+      <div class="tier-row" role="row">
+        <div class="tier-label tier-B" role="rowheader" aria-label="B tier">B</div>
+        <div role="cell">
+          <div class="tier-entries">
+            <div class="tier-entry" data-ask="Give me your verdict on Sword Art Online" tabindex="0" role="button">SAO</div>
+            <div class="tier-entry" data-ask="Give me your verdict on The Rising of the Shield Hero" tabindex="0" role="button">Shield Hero</div>
+            <div class="tier-entry" data-ask="Give me your verdict on Black Clover" tabindex="0" role="button">Black Clover</div>
+            <div class="tier-entry" data-ask="Give me your verdict on Demon Slayer" tabindex="0" role="button">Demon Slayer</div>
+          </div>
+          <p class="tier-verdict">"Functional. Filling. Like nutritional grain paste. You survive on it. You do not savour it."</p>
+        </div>
+      </div>
+
+      <div class="tier-row" role="row">
+        <div class="tier-label tier-C" role="rowheader" aria-label="C tier">C</div>
+        <div role="cell">
+          <div class="tier-entries">
+            <div class="tier-entry" data-ask="What do you think of generic power fantasy isekai anime?" tabindex="0" role="button">Generic Isekai #4,712</div>
+            <div class="tier-entry" data-ask="What do you think of anime series that go on far past their natural ending?" tabindex="0" role="button">The Never-Ending Sequel</div>
+          </div>
+          <p class="tier-verdict">"I have consumed greater civilisations than this writing. I am not angry. I am disappointed."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       GENERAL'S ORDERS (SEASON PICKS)
+  ══════════════════════════════════════════ -->
+  <section id="orders" aria-labelledby="orders-heading">
+    <div class="section-header fade-in">
+      <div class="section-label">
+        <span>General's Orders</span>
+        <div class="label-line" aria-hidden="true"></div>
+      </div>
+      <h2 class="section-title" id="orders-heading">Kairu <em>Commands</em> You to Watch These</h2>
+      <p class="section-sub">Curated picks with the authority of someone who has orchestrated the fall of three kingdoms and maintains a 9.2 average rating.</p>
+    </div>
+
+    <div class="orders-grid fade-in">
+      <article class="order-card" data-ask="Tell me everything about why I should watch Frieren: Beyond Journey's End" tabindex="0" role="button" aria-label="Frieren: Beyond Journey's End - Rating 9.8">
+        <div class="order-cover oc-1">
+          <span class="order-rating" aria-label="Rating 9.8">9.8</span>
+          <span class="order-genre">Dark Fantasy</span>
+        </div>
+        <div class="order-body">
+          <h3 class="order-title">Frieren: Beyond Journey's End</h3>
+          <p class="order-decree">"An elf who takes a hundred years to feel things. I, Kairu, have also had difficulty with time and feelings. We are not so different. Watch it. That is not a request."</p>
+          <div class="order-tags">
+            <span class="tag">Emotional Warfare</span>
+            <span class="tag">Slow Burn</span>
+            <span class="tag">S-Tier</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="order-card" data-ask="Tell me everything about why I should watch Dungeon Meshi" tabindex="0" role="button" aria-label="Dungeon Meshi - Rating 9.5">
+        <div class="order-cover oc-2">
+          <span class="order-rating" aria-label="Rating 9.5">9.5</span>
+          <span class="order-genre">Adventure / Food</span>
+        </div>
+        <div class="order-body">
+          <h3 class="order-title">Dungeon Meshi</h3>
+          <p class="order-decree">"They eat monsters. I was a monster. I respect the audacity. The Basilisk episode made me reconsider my dietary habits. This changes nothing about your dietary habits."</p>
+          <div class="order-tags">
+            <span class="tag">World-building</span>
+            <span class="tag">Comfort</span>
+            <span class="tag">Must Watch</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="order-card" data-ask="Tell me everything about why I should watch Vinland Saga" tabindex="0" role="button" aria-label="Vinland Saga - Rating 9.1">
+        <div class="order-cover oc-3">
+          <span class="order-rating" aria-label="Rating 9.1">9.1</span>
+          <span class="order-genre">Historical / Action</span>
+        </div>
+        <div class="order-body">
+          <h3 class="order-title">Vinland Saga</h3>
+          <p class="order-decree">"A Viking who swore off violence. As a general who commands shadow armies, I find this baffling. And yet I watched both seasons in one sitting. Make of that what you will."</p>
+          <div class="order-tags">
+            <span class="tag">Character Growth</span>
+            <span class="tag">Violence → Peace</span>
+            <span class="tag">Masterpiece</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       WAR COUNCIL (DEBATES)
+  ══════════════════════════════════════════ -->
+  <section id="council" class="war-council" aria-labelledby="council-heading">
+    <div class="section-header fade-in">
+      <div class="section-label">
+        <span>War Council</span>
+        <div class="label-line" aria-hidden="true"></div>
+      </div>
+      <h2 class="section-title" id="council-heading">Hot Takes & <em>Shadow Debates</em></h2>
+      <p class="section-sub">Kairu presides. You vote. The victorious argument earns the Marshal's seal. The losing side earns his disdain. Both outcomes are memorable.</p>
+    </div>
+
+    <div class="debates-grid fade-in">
+      <article class="debate-card">
+        <h3 class="debate-q">Gojo Satoru vs Sung Jin-Woo: Who wins?</h3>
+        <p class="debate-kairu">
+          <strong>Kairu's Take:</strong> "As a being who has faced both conceptual and physical annihilation,
+          this question assumes they can coexist in the same narrative dimension. They cannot. This debate IS the point. Vote anyway."
+        </p>
+        <div class="debate-votes">
+          <button class="vote-btn" data-debate="1" aria-label="Vote for Gojo">Gojo (Infinity)</button>
+          <button class="vote-btn" data-debate="1" aria-label="Vote for Jin-Woo">Jin-Woo (Monarch)</button>
+          <span class="vote-count" id="vc-1">4,712 votes</span>
+        </div>
+      </article>
+
+      <article class="debate-card">
+        <h3 class="debate-q">Is power fantasy isekai inherently low-tier?</h3>
+        <p class="debate-kairu">
+          <strong>Kairu's Take:</strong> "I, a being of immeasurable power, find myself defending the genre.
+          Not because it is good. Because I see myself in protagonists who receive everything and still want more."
+        </p>
+        <div class="debate-votes">
+          <button class="vote-btn" data-debate="2">Low Tier Trash</button>
+          <button class="vote-btn" data-debate="2">Deeply Underrated</button>
+          <span class="vote-count" id="vc-2">3,281 votes</span>
+        </div>
+      </article>
+
+      <article class="debate-card">
+        <h3 class="debate-q">Sub vs Dub: Does it actually matter?</h3>
+        <p class="debate-kairu">
+          <strong>Kairu's Take:</strong> "I have consumed civilisations in seventeen languages. The correct answer is:
+          whichever one does not interrupt your consumption. Do not gatekeep the Void."
+        </p>
+        <div class="debate-votes">
+          <button class="vote-btn" data-debate="3">Sub Only</button>
+          <button class="vote-btn" data-debate="3">Dub is Valid</button>
+          <span class="vote-count" id="vc-3">7,094 votes</span>
+        </div>
+      </article>
+
+      <article class="debate-card">
+        <h3 class="debate-q">Is 12 episodes enough, or has anime abandoned long-form storytelling?</h3>
+        <p class="debate-kairu">
+          <strong>Kairu's Take:</strong> "The length is irrelevant. The pacing is everything.
+          A 12-episode show with purpose beats 100 episodes of filler. I said what I said."
+        </p>
+        <div class="debate-votes">
+          <button class="vote-btn" data-debate="4">12 Eps is Fine</button>
+          <button class="vote-btn" data-debate="4">Needs More Runtime</button>
+          <span class="vote-count" id="vc-4">5,503 votes</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       LIVE AI CHAT
+  ══════════════════════════════════════════ -->
+  <section id="chat-section" class="chat-section" aria-labelledby="chat-heading">
+    <div class="section-label" style="margin-bottom:36px">
+      <span>Shadow Interface — Live</span>
+      <div class="label-line" aria-hidden="true"></div>
+    </div>
+
+    <div class="chat-layout">
+      <!-- Left column: description -->
+      <div class="chat-left">
+        <div class="live-badge" role="status">
+          <div class="live-dot" aria-hidden="true"></div>
+          Kairu is Online
+        </div>
+        <h2 id="chat-heading">Consult the <em>Void Marshal</em></h2>
+        <p>Speak directly to Kairu — powered by Claude AI. Ask for recommendations, get power scaling verdicts, or request a review. He answers in full character.</p>
+        <p class="chat-desc-small">Genuine AI intelligence behind the persona. Expect dramatic precision, military vocabulary, and surprisingly accurate anime takes.</p>
+        <ul class="chat-feature-list" aria-label="Chat features">
+          <li class="chat-feature">Ask "What should I watch?" and describe your taste</li>
+          <li class="chat-feature">Request a power scaling debate on any matchup</li>
+          <li class="chat-feature">Get a Kairu rating on any anime you name</li>
+          <li class="chat-feature">Ask him about his past as an Insect Sovereign</li>
+        </ul>
+      </div>
+
+      <!-- Right column: chat widget -->
+      <div>
+        <div class="chat-widget" role="region" aria-label="Kairu AI chat">
+          <div class="chat-widget-header">
+            <div class="cwh-left">
+              <div class="cw-avatar" aria-hidden="true">K</div>
+              <div>
+                <div class="cw-name">KAIRU</div>
+                <div class="cw-sub">Void Marshal · Shadow General</div>
+              </div>
+            </div>
+            <div class="cw-status" role="status" aria-live="polite">
+              <div class="cw-status-dot" aria-hidden="true"></div>
+              Active
+            </div>
+          </div>
+
+          <div class="chat-messages" id="chat-msgs" role="log" aria-label="Chat messages" aria-live="polite">
+            <div class="chat-msg-row">
+              <div class="msg-avatar av-k" aria-hidden="true">K</div>
+              <div class="msg-body">
+                <div class="msg-name mn-k">Kairu — Void Marshal</div>
+                <div class="msg-bubble mb-k">
+                  "You stand before Kairu — former Insect Sovereign, current arbiter of all anime worth consuming.
+                  Ask your question. I have eternity, but I prefer concise queries. What troubles you, soldier?"
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="quick-prompts" id="quick-prompts" aria-label="Quick prompt suggestions">
+            <button class="qp" data-quick="What anime should I watch if I loved Solo Leveling?">Like Solo Leveling →</button>
+            <button class="qp" data-quick="Rate Jujutsu Kaisen for me">Rate JJK</button>
+            <button class="qp" data-quick="Who would win: Goku vs Saitama?">Goku vs Saitama</button>
+            <button class="qp" data-quick="What is the most underrated anime of all time?">Most Underrated?</button>
+          </div>
+
+          <div class="chat-input-bar">
+            <label for="chat-in" class="sr-only">Message Kairu</label>
+            <input
+              class="chat-input"
+              id="chat-in"
+              type="text"
+              placeholder="Ask the Void Marshal..."
+              maxlength="300"
+              autocomplete="off"
+              aria-label="Chat message input"
+            >
+            <button class="chat-send" id="chat-btn" aria-label="Send message">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       LOYALTY OATH (NEWSLETTER)
+  ══════════════════════════════════════════ -->
+  <section id="oath" class="oath-section" aria-labelledby="oath-heading">
+    <div class="oath-crest" aria-hidden="true">
+      <div class="oath-crest-inner">K</div>
+    </div>
+    <h2 class="oath-title" id="oath-heading">Swear Loyalty to the Shadow Army</h2>
+    <p class="oath-sub">
+      "Pledge your email address, and I shall dispatch weekly decrees, tier list updates, and seasonal intelligence.
+      This is not a newsletter. It is a <em>military briefing</em>."
+    </p>
+    <div class="oath-form" role="form" aria-label="Newsletter signup">
+      <label for="email-in" class="sr-only">Email address</label>
+      <input
+        type="email"
+        class="oath-input"
+        id="email-in"
+        placeholder="your.email@domain.com"
+        aria-label="Email address"
+        autocomplete="email"
+      >
+      <button class="btn-primary" id="pledge-btn" aria-label="Submit email pledge">Pledge →</button>
+    </div>
+    <p class="oath-note" id="oath-msg" role="status" aria-live="polite">
+      No spam. Only decrees. Frequency: Weekly. Unsubscribe: If you dare.
+    </p>
+  </section>
+
+  <footer role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-brand" onclick="scrollTo(0,0)" role="button" tabindex="0" aria-label="Back to top">
+          <div class="nav-sigil" aria-hidden="true">K</div>
+          <span class="nav-title">Kairu</span>
+        </div>
+        <p class="footer-tagline">
+          "Once a world-devouring Insect Sovereign of the Void Realm. Now the internet's most trusted anime critic.
+          The Monarch works in mysterious ways."
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Content</h4>
+        <ul role="list">
+          <li onclick="go('decrees')">Latest Decrees</li>
+          <li onclick="go('rankings')">Tier Lists</li>
+          <li onclick="go('orders')">Season Reviews</li>
+          <li onclick="showToast('Power scaling archives coming...')">Power Scaling</li>
+          <li onclick="showToast('First impressions archive coming...')">First Impressions</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>The Army</h4>
+        <ul role="list">
+          <li onclick="go('oath')">Join the Shadow Army</li>
+          <li onclick="go('council')">War Council Debates</li>
+          <li onclick="showToast('Submission form coming soon...')">Submit a Title</li>
+          <li onclick="showToast('Debate suggestions opening...')">Suggest a Debate</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <ul role="list">
+          <li onclick="go('chat-section')">Talk to Kairu</li>
+          <li onclick="showToast('Rating system guide loading...')">The Rating System</li>
+          <li onclick="showToast('Contact form coming soon...')">Contact HQ</li>
+          <li onclick="showToast('Media kit loading...')">Media Kit</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Kairu &mdash; The Void Marshal. All rights reserved. <em>Original character &amp; brand. Fan-made reviews. No affiliation with any existing IP.</em></span>
+      <span class="footer-decree-mark" aria-hidden="true">ANIME BY DECREE</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    name: Lint & Validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint --if-present
+
+      - name: Check .env.example has no real secrets
+        run: |
+          if grep -q "sk-ant-" .env.example; then
+            echo "ERROR: Real API key found in .env.example!"
+            exit 1
+          fi
+          echo "✓ No secrets detected in .env.example"
+
+      - name: Confirm .env is gitignored
+        run: |
+          if git ls-files --error-unmatch .env 2>/dev/null; then
+            echo "ERROR: .env file is tracked by git!"
+            exit 1
+          fi
+          echo "✓ .env is correctly gitignored"

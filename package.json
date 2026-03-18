@@ -1,0 +1,38 @@
+{
+  "name": "kairu-void-marshal",
+  "version": "1.0.0",
+  "description": "KAIRU — The Void Marshal. A personality-driven anime review website with live AI chat powered by Claude.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "lint": "eslint public/js/*.js server.js",
+    "lint:fix": "eslint public/js/*.js server.js --fix"
+  },
+  "keywords": [
+    "anime",
+    "review",
+    "tier-list",
+    "claude",
+    "anthropic",
+    "ai-chat",
+    "express"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.30.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.1",
+    "helmet": "^7.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.10.0",
+    "nodemon": "^3.1.4"
+  }
+}
