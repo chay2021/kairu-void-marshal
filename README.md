@@ -214,7 +214,7 @@ All CSS variables are at the top of `public/css/style.css`:
 
 ---
 
-## website-overview
+## 🌐 website-overview
 
 <img width="1398" height="876" alt="image" src="https://github.com/user-attachments/assets/784a24e7-7c36-4b92-911b-51aa569544ae" />
 <img width="1399" height="838" alt="image" src="https://github.com/user-attachments/assets/f46284bc-15b7-4d20-9163-6318d5228de7" />
